@@ -8,7 +8,7 @@
 
 `UTF-8` 是一種針對 Unicode 的可變長度字元編碼，英文字符一樣會依照 ASCII 碼規範，只占一個字節 8 bit，而中文字符的話，統一就占三個字節
 
-回顧可以參考 [Python 基礎 - 02 - 字符編碼](./Python%20基礎%20-%2002%20-%20字符編碼.md)
+回顧可以參考 [Python 基礎 - 02 - 字符編碼](./Python%20基礎%20-%2002%20-%20字符編碼.md)
 
 **字符編碼解碼流程**
 
@@ -218,7 +218,7 @@ b'\xc4\xe3\xba\xc3\xd1\xba'
 Process finished with exit code 0
 ```
 
-上面代碼的確認系統的編碼是 `utf-8` ，而`你好押` 變成了 `b'\xc4\xe3\xba\xc3\xd1\xba'`，在最前面的`b`指的就是[bytes類型](http://ithelp.ithome.com.tw/articles/10185614)，會變成這樣是因為Python3預設就是默認使用 `Unicode中的utf-8` ，而我們使用了 `s.encode(encoding='gbk')` ，導致它打印出來就是一個 `bytes類型` ，不相信！那我們來打印一個是 `utf-8的bytes類型`
+上面代碼的確認系統的編碼是 `utf-8` ，而`你好押` 變成了 `b'\xc4\xe3\xba\xc3\xd1\xba'`，在最前面的 `b` 指的就是[bytes 類型](./Python%20基礎%20-%2010%20-%20bytes%20數據類型.md)，會變成這樣是因為 Python3 預設就是默認使用 `Unicode中的utf-8` ，而我們使用了 `s.encode(encoding='gbk')` ，導致它打印出來就是一個 `bytes類型` ，不相信！那我們來打印一個是 `utf-8 的 bytes 類型`
 
 ```
 #!/usr/bin/env python3
@@ -305,9 +305,6 @@ utf8_str: 你好押
 Process finished with exit code 0
 
 ```
-
-
-
 
 
 
