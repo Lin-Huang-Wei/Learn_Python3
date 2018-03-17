@@ -6,7 +6,7 @@
 
 **通過 `yield` 實現單綫程的情況下，實現並發運算的效果**
 
-```
+```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
@@ -31,7 +31,7 @@ Process finished with exit code 0
 
 其實很簡單，在調用一次 `__next__()` 方法，就可以了
 
-```
+```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
@@ -55,7 +55,7 @@ Process finished with exit code 0
 
 耶！包子被打印出來了，注意，包子變成 none ，而這個 none 是代表包子為空，當然就沒有包子可以吃，那要怎麼做一個包子給 Tony ？
 
-```
+```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
@@ -87,7 +87,7 @@ Process finished with exit code 0
 
 看下面代碼就可以更清楚了解
 
-```
+```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
@@ -118,7 +118,7 @@ Process finished with exit code 0
 
 有沒有發現上面代碼裡面看起來很像二個任務在交互，所以接下來我們就把做包子的過程規範一點。
 
-```
+```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
