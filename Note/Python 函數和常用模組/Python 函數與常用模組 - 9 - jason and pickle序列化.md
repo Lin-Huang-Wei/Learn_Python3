@@ -419,11 +419,118 @@ None
 Process finished with exit code 0
 ```
 
-剛剛的例子都只 dump 一次，那可以 dump 多次嗎？
+剛剛的例子都只 dump 一次，那可以 dump 多次嗎？在 Python2.7 中是可以 dump 好多次，load 好多次，先被 dump 進去的，就會被先 load 出來，但在 Python3 中，load 的話，最多只能 load 一次，請看下面代碼，並觀察
+
+先 dump 二筆資料到 `test2.txt`
 
 ```python
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import json
+
+info = {
+    'name':'tony',
+    'age':22
+}
+
+f = open("test2.txt", "w")
+f.write(json.dumps(info))
+info['age'] = 21
+f.write(json.dumps(info))
+f.close()
+```
+
+會產生一個檔案叫 `test2.txt`，內容為底下
 
 ```
+{"name": "tony", "age": 22}{"name": "tony", "age": 21}
+```
+
+再把剛剛的 `test2.txt` 給打印出來
+
+```
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import json
+
+f = open("test2.txt", "r")
+
+for line in f:
+    print(line)
+f.close()
+
+---------------執行結果---------------
+{"name": "tony", "age": 22}{"name": "tony", "age": 21}
+
+Process finished with exit code 0
+```
+
+再來用 `json.loads` 把它讀取出來
+
+```
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import json
+
+info = {
+    'name':'tony',
+    'age':22
+}
+f = open("test2.txt", "r")
+
+for line in f:
+    # print(line)
+    print(json.loads(line))
+f.close()
+
+---------------執行結果---------------
+Traceback (most recent call last):
+  File "/Python/path/json反序列化3.py", line 14, in <module>
+    print(json.loads(line))
+  File "/usr/local/Cellar/python3/3.6.0/Frameworks/Python.framework/Versions/3.6/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python3/3.6.0/Frameworks/Python.framework/Versions/3.6/lib/python3.6/json/decoder.py", line 342, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 1 column 28 (char 27)
+
+Process finished with exit code 1
+```
+
+會發現出現 **JSONDecodeError** ，這是因為剛說，在 Python3 中，最多就只能讀取一次，請在把 `test2.txt` 的內容修改成
+
+```
+{"name": "tony", "age": 22}
+```
+
+並在再次執行代碼
+
+```
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import json
+
+info = {
+    'name':'tony',
+    'age':22
+}
+f = open("test2.txt", "r")
+
+for line in f:
+    # print(line)
+    print(json.loads(line))
+f.close()
+
+---------------執行結果---------------
+{'name': 'tony', 'age': 22}
+
+Process finished with exit code 0
+```
+
+這時候就可以正常執行了。
 
 **Json 特性**
 
